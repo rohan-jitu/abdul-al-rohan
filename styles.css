@@ -75,7 +75,7 @@
   
   /* Section Styles */
   section {
-    padding: 72px 0;
+    padding: 56px 0;
     min-height: 100vh;
     display: flex;
     justify-content: space-around;
@@ -352,7 +352,7 @@
   .contact-info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin: 40px 0px;
   }
   
   .contact-item {
@@ -366,6 +366,16 @@
     margin-bottom: 12px;
   }
   
+  .contact-item p a  {
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: 1.75px;
+  }
+
+  .contact-item p a:hover{
+    color: var(--primary-color);
+  }
+
   #contact-form {
     display: grid;
     gap: 20px;
@@ -429,13 +439,19 @@
   
   /* Responsive Design */
   @media (max-width: 768px) {
+
+    section {
+      padding: 28px 0;
+    }
     header {
+
       position: static;
       text-align: center;
-      padding: 20px 0;
+      padding-top: 20px;
     }
   
     nav ul {
+      margin-top: 12px;
       display: flex;
       justify-content: center;
     }

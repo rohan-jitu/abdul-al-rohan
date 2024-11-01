@@ -180,7 +180,11 @@
   .personal-info ul li span a {
   text-decoration: none;
   color:var(--text-color);
-}
+  }
+
+  .personal-info ul li span a:hover {
+    color: var(--primary-color);
+  }
   .stats {
     display: flex;
     flex-wrap: wrap;
@@ -432,7 +436,7 @@
   }
   
   .social-links a:hover {
-    background-color: #e0a800;
+    background-color: var(--text-color);
   }
 
 
@@ -519,3 +523,137 @@
     return null; // This is a CSS-only component, so we return null
   }  
 
+
+
+
+
+
+
+  .review-item {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+  
+  .reviews {
+    flex: 0 0 auto;
+    width: 320px;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    margin-right: 20px;
+    box-shadow: 0 4px 6px rgba(255, 242, 146, 0.1);
+    animation: scroll 60s infinite linear;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px; /* Adjust this value as needed */
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(calc(-300px * 7 - 20px * 7));
+    }
+  }
+  
+  .review-text {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+  
+  .review-text span {
+    font-size: 20px;
+    color: var(--primary-color);
+  }
+  
+  .star-icon {
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .star-icon i {
+    margin: 0 2px;
+  }
+  
+  .reviewer-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reviewer-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .reviewer-info dir {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .reviewer-info h3 {
+    font-size: 18px;
+    letter-spacing: 1.1px;
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  .reviewer-info p {
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.2;
+  }
+  
+  /* Pause animation on hover */
+  .review-item:hover .reviews {
+    animation-play-state: paused;
+  }
+  
+  /* Ensure smooth looping */
+  .review-item::before,
+  .review-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    z-index: 2;
+  }
+  
+  .review-item::before {
+    left: 0;
+    background: linear-gradient(to right, var(--secondary-color), transparent);
+  }
+  
+  .review-item::after {
+    right: 0;
+    background: linear-gradient(to left, var(--secondary-color), transparent);
+  }
+  
+  /* Add this to create a seamless loop */
+  .reviews:first-child {
+    margin-left: -20px;
+  }
+  
+  .reviews:last-child {
+    margin-right: -20px;
+  }

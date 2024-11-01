@@ -1,4 +1,3 @@
-
 // let fullName ="Abdul Al Rohan";
 // let year =19;
 // console.log(`My name is ${fullName}, and I'm ${year} years old.`);
@@ -71,7 +70,7 @@
 // let age = 18;
 // if (age >= 18) {
 //   console.log("You are an adult.");
-// } 
+// }
 // else {
 //   console.log("You are a minor.");
 // }
@@ -115,12 +114,11 @@
 // console.log(result);
 
 // let num = prompt("Enter a number:");
-//  if(num%5 === 0){ 
+//  if(num%5 === 0){
 //     console.log( num, "is a multiple of 5");
 //   } else {
 //     console.log( num, "is not a multiple of 5");
 //   }
-
 
 // let score = prompt("Enter your score:");
 // if (score >= 80 && score < 100) {
@@ -155,7 +153,6 @@
 
 // loop function
 
-
 // for (let i = 1; i <= 5; i++) {
 //     console.log("My name is Abdul Al Rohan");
 //   }
@@ -188,7 +185,6 @@
 // console.log("n =", n);
 // console.log(sum);
 
-
 // do {
 //   console.log("My name is Abdul Al Rohan");
 //   i = i + 1;
@@ -198,8 +194,6 @@
 // for ( let i of str) {
 //   console.log(i);
 // }
-
-
 
 // let student = {
 //   name: "Abdul Al Rohan",
@@ -227,7 +221,6 @@
 //   console.log("You gussed the wrong Number! The correct number was", gameNumber);
 // }
 
-
 // string function
 
 // const student ={
@@ -253,8 +246,6 @@
 
 // practice 1
 
-
-
 // let markOfStudent = [80, 75, 90, 85, 95];
 // let sum = 0;
 // for (let val of markOfStudent) {
@@ -273,10 +264,9 @@
 
 // practice 2
 
-
 // let intPrice = [250, 645, 300, 900, 50];
 
-// let idx = 0 
+// let idx = 0
 // for (let val of intPrice) {
 //   console.log(`the value is ${idx} = ${val}`);
 //   idx++;
@@ -323,108 +313,126 @@
 
 //   countVowels("hello world");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   // Smooth scrolling for navigation
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-              behavior: 'smooth'
-          });
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
       });
+    });
   });
 
   // Skill progress circles
-  const circles = document.querySelectorAll('.progress-ring__circle');
-  circles.forEach(circle => {
-      const radius = circle.r.baseVal.value;
-      const circumference = radius * 2 * Math.PI;
-      circle.style.strokeDasharray = `${circumference} ${circumference}`;
-      circle.style.strokeDashoffset = circumference;
+  const circles = document.querySelectorAll(".progress-ring__circle");
+  circles.forEach((circle) => {
+    const radius = circle.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference;
 
-      const percent = circle.parentNode.nextElementSibling.querySelector('.skill-percentage').textContent;
-      const offset = circumference - percent.slice(0, -1) / 100 * circumference;
-      circle.style.strokeDashoffset = offset;
+    const percent =
+      circle.parentNode.nextElementSibling.querySelector(
+        ".skill-percentage"
+      ).textContent;
+    const offset = circumference - (percent.slice(0, -1) / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+  });
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const track = document.querySelector(".review-track");
+    const reviews = document.querySelectorAll(".reviews");
+    const reviewWidth =
+      reviews[0].offsetWidth +
+      parseInt(window.getComputedStyle(reviews[0]).marginRight);
+    let currentIndex = 0;
+
+    // Clone the reviews and append them to the track
+    reviews.forEach((review) => {
+      const clone = review.cloneNode(true);
+      track.appendChild(clone);
+    });
+
+    function moveCarousel() {
+      currentIndex++;
+      track.style.transition = "transform 0.5s ease";
+      track.style.transform = `translateX(${-currentIndex * reviewWidth}px)`;
+
+      // If we've moved beyond the original set, jump back without transition
+      if (currentIndex >= reviews.length) {
+        setTimeout(() => {
+          track.style.transition = "none";
+          currentIndex = 0;
+          track.style.transform = `translateX(0)`;
+        }, 500); // This should match the transition time
+      }
+    }
+
+    // Move the carousel every 3 seconds
+    let intervalId = setInterval(moveCarousel, 3000);
+
+    // Pause on hover
+    track.addEventListener("mouseenter", () => {
+      clearInterval(intervalId);
+    });
+
+    track.addEventListener("mouseleave", () => {
+      intervalId = setInterval(moveCarousel, 3000);
+    });
   });
 
   // Portfolio filtering
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  const filterButtons = document.querySelectorAll(".filter-btn");
+  const portfolioItems = document.querySelectorAll(".portfolio-item");
 
-  filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-          const filter = button.dataset.filter;
-          
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
 
-          portfolioItems.forEach(item => {
-              if (filter === 'all' || item.dataset.category === filter) {
-                  item.style.display = 'block';
-              } else {
-                  item.style.display = 'none';
-              }
-          });
+      filterButtons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      portfolioItems.forEach((item) => {
+        if (filter === "all" || item.dataset.category === filter) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }
       });
+    });
   });
 
   // Form submission
-  const form = document.getElementById('contact-form');
-  form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Here you would typically send the form data to a server
-      // For this example, we'll just log it to the console
-      const formData = new FormData(form);
-      console.log('Form submitted with data:', Object.fromEntries(formData));
-      alert('Thank you for your message! I\'ll get back to you soon.');
-      form.reset();
+  const form = document.getElementById("contact-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // Here you would typically send the form data to a server
+    // For this example, we'll just log it to the console
+    const formData = new FormData(form);
+    console.log("Form submitted with data:", Object.fromEntries(formData));
+    alert("Thank you for your message! I'll get back to you soon.");
+    form.reset();
   });
 
   // Intersection Observer for fade-in effect
-  const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              entry.target.classList.add('fade-in');
-          }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-in");
+        }
       });
-  }, { threshold: 0.1 });
+    },
+    { threshold: 0.1 }
+  );
 
-  document.querySelectorAll('section').forEach(section => {
-      observer.observe(section);
+  document.querySelectorAll("section").forEach((section) => {
+    observer.observe(section);
   });
 
   // Add fade-in class for CSS animation
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
       .fade-in {
           animation: fadeIn 1s ease-out forwards;
